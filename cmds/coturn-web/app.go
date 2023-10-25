@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -49,9 +50,10 @@ func (r *CompositionRoot) startupModules() error {
 func (r *CompositionRoot) runRestServer(ctx context.Context) error {
 	mux := r.moduleCtx.Mux()
 	logger := r.moduleCtx.Logger()
+	config := r.moduleCtx.Config()
 
 	restServer := &http.Server{
-		Addr:    "127.0.0.1:8080",
+		Addr: fmt.Sprintf(":%s", config.Get("PORT")),
 		Handler: mux,
 	}
 

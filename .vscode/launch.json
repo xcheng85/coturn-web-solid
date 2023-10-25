@@ -13,7 +13,8 @@
             "env": {
                 "CONFIG_PATH": "/config/config.yaml",
                 "SECRET_PATH": "/mnt/secrets-store/viz3d-secrets",
-                "ELB_EXTERNAP_IP": "8.8.8.8"
+                "ELB_EXTERNAP_IP": "8.8.8.8",
+                "PORT": "3000"
             }
         }
     ]
