@@ -1,0 +1,10 @@
+turn_config:
+  port: 3478
+  ttl_seconds: 7200
+  use_public_stun: true
+  use_private_stun: true
+  use_tcp: false
+  use_udp: true
+  username: username
+  use_lt_cred_mech: true
+  ice_transport_policy: all
