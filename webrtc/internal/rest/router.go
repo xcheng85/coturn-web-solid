@@ -22,6 +22,7 @@ func NewWebRTCRouter(handler handler.WebRTCHandler, ctx context.Context, mux *ch
 
 func (router* WebRTCRouter) Register() error {
 	r := chi.NewRouter()
+	r.Use(router.handler.Authorize)
 	r.Get("/", router.handler.GetWebRTCConfig)
 	router.mux.Mount("/", r)
 	return nil

@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/go-chi/chi/v5"
 	"github.com/xcheng85/coturn-web-solid/internal/config"
+	"github.com/xcheng85/coturn-web-solid/internal/auth"
 	"go.uber.org/zap"
 )
 
@@ -12,6 +13,7 @@ type IModuleContext interface {
 	Mux() *chi.Mux
 	Logger() *zap.Logger
 	Config() config.IConfig
+	Auth() auth.IAuthService
 }
 
 type Module interface {

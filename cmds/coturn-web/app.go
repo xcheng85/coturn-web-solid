@@ -9,6 +9,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/render"
+	"github.com/xcheng85/coturn-web-solid/internal/auth"
 	"github.com/xcheng85/coturn-web-solid/internal/config"
 	"github.com/xcheng85/coturn-web-solid/internal/module"
 	"github.com/xcheng85/coturn-web-solid/internal/worker"
@@ -53,7 +54,7 @@ func (r *CompositionRoot) runRestServer(ctx context.Context) error {
 	config := r.moduleCtx.Config()
 
 	restServer := &http.Server{
-		Addr: fmt.Sprintf(":%s", config.Get("PORT")),
+		Addr:    fmt.Sprintf(":%s", config.Get("PORT")),
 		Handler: mux,
 	}
 
@@ -71,7 +72,7 @@ func (r *CompositionRoot) runRestServer(ctx context.Context) error {
 		<-gCtx.Done()
 		logger.Sugar().Info("web server to be shutdown")
 		// gracefully shut down rest server
-		ctx, cancel := context.WithTimeout(context.Background(), 1 * time.Minute)
+		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
 		defer cancel()
 		if err := restServer.Shutdown(ctx); err != nil {
 			return err
@@ -103,13 +104,15 @@ type ModuleContext struct {
 	mux    *chi.Mux
 	logger *zap.Logger
 	config config.IConfig
+	auth   auth.IAuthService
 }
 
-func newModuleContext(mux *chi.Mux, logger *zap.Logger, config config.IConfig) module.IModuleContext {
+func newModuleContext(mux *chi.Mux, logger *zap.Logger, config config.IConfig, auth auth.IAuthService) module.IModuleContext {
 	return &ModuleContext{
-		mux:    mux,
-		logger: logger,
-		config: config,
+		mux,
+		logger,
+		config,
+		auth,
 	}
 }
 
@@ -123,4 +126,8 @@ func (r *ModuleContext) Logger() *zap.Logger {
 
 func (r *ModuleContext) Config() config.IConfig {
 	return r.config
+}
+
+func (r *ModuleContext) Auth() auth.IAuthService {
+	return r.auth
 }

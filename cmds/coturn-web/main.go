@@ -8,6 +8,7 @@ import (
 	_ "github.com/go-chi/chi/v5/middleware"
 	"github.com/xcheng85/coturn-web-solid/internal/config"
 	"github.com/xcheng85/coturn-web-solid/internal/logger"
+	"github.com/xcheng85/coturn-web-solid/internal/auth"
 	"github.com/xcheng85/coturn-web-solid/internal/module"
 	"github.com/xcheng85/coturn-web-solid/internal/worker"
 	"github.com/xcheng85/coturn-web-solid/k8s"
@@ -32,6 +33,7 @@ func main() {
 		func(logger *zap.Logger) (config.IConfig, error) {
 			return config.NewViperConfig([]string{os.Getenv("CONFIG_PATH"), os.Getenv("SECRET_PATH")}, logger)
 		})
+	container.Provide(auth.NewAuthService)
 	container.Provide(newCompositionRoot)
 	container.Provide(k8s.NewK8sModule, dig.Name("k8s"))
 	container.Provide(webrtc.NewWebRTCModule, dig.Name("webrtc"))
