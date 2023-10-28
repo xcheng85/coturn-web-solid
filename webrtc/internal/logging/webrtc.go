@@ -24,7 +24,7 @@ func LogServiceAccess(service service.WebRTCService, logger* zap.Logger) WebRTCS
 	}
 }
 
-func (svc WebRTCService) GetWebRTCConfig(ctx context.Context, data dto.GetWebRTCConfigRequest) (*domain.RTCConfig, err error) {
+func (svc WebRTCService) GetWebRTCConfig(ctx context.Context, data dto.GetWebRTCConfigRequest) (rtcconfig *domain.RTCConfig, err error) {
 	svc.logger.Info("--> webrtc.GetWebRTCConfig")
 	defer func() {
 		svc.logger.Sugar().Error(err)

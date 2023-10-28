@@ -33,11 +33,7 @@ composition owns list of modules
 all the modules have the same interface and only differentiations: 
 dig.Name("modulename")
 
-
-
 start up web server
-
-
 
 ```
 
@@ -45,4 +41,13 @@ start up web server
 ```shell
 export CONFIG_PATH=/config/config.yaml
 export SECRET_PATH=/mnt/secrets-store/viz3d-secrets
+```
+
+## Test
+```shell
+export CONFIG_PATH=/config/config.yaml
+export SECRET_PATH=/mnt/secrets-store/viz3d-secrets
+go test ./... -covermode=count -coverprofile=coverage.out
+go tool cover -html coverage.out -o coverage.html
+gocover-cobertura < coverage.out > coverage.xml
 ```

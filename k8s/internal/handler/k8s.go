@@ -19,11 +19,11 @@ func NewK8sHandler() K8sHandler {
 }
 
 func (handler k8sHandler) GetLivenessProbe(w http.ResponseWriter, r *http.Request) {
-	render.Status(r, http.StatusCreated)
+	render.Status(r, http.StatusOK)
 	render.Render(w, r, http_utils.TextOkRender("livenessProbe passes"))
 }
 
 func (handler k8sHandler) GetReadinessProbe(w http.ResponseWriter, r *http.Request) {
-	render.Status(r, http.StatusCreated)
+	render.Status(r, http.StatusOK)
 	render.Render(w, r, http_utils.TextOkRender("readinessProbe passes"))
 }
