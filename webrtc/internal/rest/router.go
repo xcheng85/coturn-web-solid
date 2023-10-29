@@ -7,12 +7,12 @@ import (
 )
 
 type WebRTCRouter struct {
-	handler handler.WebRTCHandler
+	handler handler.IWebRTCHandler
 	mux *chi.Mux
 	ctx context.Context
 }
 
-func NewWebRTCRouter(handler handler.WebRTCHandler, ctx context.Context, mux *chi.Mux) *WebRTCRouter {
+func NewWebRTCRouter(handler handler.IWebRTCHandler, ctx context.Context, mux *chi.Mux) *WebRTCRouter {
 	return &WebRTCRouter{
 		handler: handler,
 		mux: mux,

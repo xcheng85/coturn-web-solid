@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+//go:generate mockery --name IAuthService
 type IAuthService interface {
 	Authorize(r *http.Request) (user string, err error)
 }

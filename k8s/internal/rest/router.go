@@ -7,12 +7,12 @@ import (
 )
 
 type K8sRouter struct {
-	handler handler.K8sHandler
+	handler handler.IK8sHandler
 	mux *chi.Mux
 	ctx context.Context
 }
 
-func NewK8sRouter(handler handler.K8sHandler, ctx context.Context, mux *chi.Mux) *K8sRouter {
+func NewK8sRouter(handler handler.IK8sHandler, ctx context.Context, mux *chi.Mux) *K8sRouter {
 	return &K8sRouter{
 		handler: handler,
 		mux: mux,

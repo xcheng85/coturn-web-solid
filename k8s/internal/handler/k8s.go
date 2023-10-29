@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-type K8sHandler interface {
+type IK8sHandler interface {
 	GetLivenessProbe(w http.ResponseWriter, r *http.Request)
 	GetReadinessProbe(w http.ResponseWriter, r *http.Request)
 }
@@ -14,7 +14,7 @@ type K8sHandler interface {
 type k8sHandler struct {
 }
 
-func NewK8sHandler() K8sHandler {
+func NewK8sHandler() IK8sHandler {
 	return &k8sHandler{}
 }
 

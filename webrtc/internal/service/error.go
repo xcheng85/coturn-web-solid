@@ -20,3 +20,7 @@ func (s *EmptyExternalIpErr) Is(target error) bool {
   }
   return true
 }
+
+func NewEmptyExternalIpErr() *EmptyExternalIpErr {
+	return &EmptyExternalIpErr{}
+}

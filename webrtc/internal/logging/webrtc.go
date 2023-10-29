@@ -10,14 +10,14 @@ import (
 
 // decorator pattern in golang, automatically satisfy interface: handler.RendererHandler
 type WebRTCService struct {
-	service.WebRTCService
+	service.IWebRTCService
 	logger *zap.Logger
 }
 
-var _ service.WebRTCService = (*WebRTCService)(nil)
+var _ service.IWebRTCService = (*WebRTCService)(nil)
 
 // ctor
-func LogServiceAccess(service service.WebRTCService, logger* zap.Logger) WebRTCService {
+func LogServiceAccess(service service.IWebRTCService, logger* zap.Logger) WebRTCService {
 	return WebRTCService{
 		service,
 		logger,
@@ -30,5 +30,5 @@ func (svc WebRTCService) GetWebRTCConfig(ctx context.Context, data dto.GetWebRTC
 		svc.logger.Sugar().Error(err)
 		svc.logger.Info("<-- webrtc.GetWebRTCConfig")
 	}()
-	return svc.WebRTCService.GetWebRTCConfig(ctx, data)
+	return svc.IWebRTCService.GetWebRTCConfig(ctx, data)
 }

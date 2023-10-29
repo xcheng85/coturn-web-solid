@@ -9,7 +9,8 @@ import (
 	"go.uber.org/zap"
 )
 
-type WebRTCService interface {
+//go:generate mockery --name IWebRTCService
+type IWebRTCService interface {
 	GetWebRTCConfig(ctx context.Context, data dto.GetWebRTCConfigRequest) (*domain.RTCConfig, error)
 }
 
@@ -18,9 +19,9 @@ type webRTCService struct {
 	config config.IConfig
 }
 
-var _ WebRTCService = (*webRTCService)(nil)
+var _ IWebRTCService = (*webRTCService)(nil)
 
-func NewWebRTCService(logger *zap.Logger, config config.IConfig) WebRTCService {
+func NewWebRTCService(logger *zap.Logger, config config.IConfig) IWebRTCService {
 	return &webRTCService{
 		logger,
 		config,
@@ -45,7 +46,7 @@ func (svc webRTCService) GetWebRTCConfig(ctx context.Context, data dto.GetWebRTC
 	ips := []string{externalIP}
 
 	if len(ips) == 0 {
-		return nil, &EmptyExternalIpErr{}
+		return nil, NewEmptyExternalIpErr()
 	}
 
 	publicStunServerUrls, stunServerUrls, turnServerUrls := []string{

@@ -51,3 +51,18 @@ go test ./... -covermode=count -coverprofile=coverage.out
 go tool cover -html coverage.out -o coverage.html
 gocover-cobertura < coverage.out > coverage.xml
 ```
+
+## Auto Generate Mock
+```shell
+# https://vektra.github.io/mockery/latest/
+# install mockery
+wget https://github.com/vektra/mockery/releases/download/v2.36.0/mockery_2.36.0_Linux_x86_64.tar.gz .
+sudo tar -C /usr/local/bin -xzf ./mockery_2.36.0_Linux_x86_64.tar.gz
+
+# go directive
+//go:generate mockery --name DB
+
+# generate mock
+xcheng4@SLB-8N5VFY3:~/coturn-web-solid/webrtc/internal/service$ go generate
+xcheng4@SLB-8N5VFY3:~/coturn-web-solid/internal/auth$ go generate
+```

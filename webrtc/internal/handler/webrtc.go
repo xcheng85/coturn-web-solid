@@ -10,18 +10,18 @@ import (
 	"github.com/xcheng85/coturn-web-solid/webrtc/internal/service"
 )
 
-type WebRTCHandler interface {
+type IWebRTCHandler interface {
 	GetWebRTCConfig(w http.ResponseWriter, r *http.Request)
 	// middleware
 	Authorize(next http.Handler) http.Handler
 }
 
 type webRTCHandler struct {
-	webRTCService service.WebRTCService
+	webRTCService service.IWebRTCService
 	authService auth.IAuthService
 }
 
-func NewWebRTCHandler(webRTCService service.WebRTCService, authService auth.IAuthService) WebRTCHandler {
+func NewWebRTCHandler(webRTCService service.IWebRTCService, authService auth.IAuthService) IWebRTCHandler {
 	return &webRTCHandler{
 		webRTCService,
 		authService,
