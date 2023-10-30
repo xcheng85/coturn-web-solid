@@ -48,6 +48,8 @@ export SECRET_PATH=/mnt/secrets-store/viz3d-secrets
 export CONFIG_PATH=/config/config.yaml
 export SECRET_PATH=/mnt/secrets-store/viz3d-secrets
 go test ./... -covermode=count -coverprofile=coverage.out
+grep -v -E -f .covignore coverage.out > coverage.filtered.out
+mv coverage.filtered.out coverage.out
 go tool cover -html coverage.out -o coverage.html
 gocover-cobertura < coverage.out > coverage.xml
 ```

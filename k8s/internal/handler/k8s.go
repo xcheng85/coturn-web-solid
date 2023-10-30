@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+//go:generate mockery --name IK8sHandler
 type IK8sHandler interface {
 	GetLivenessProbe(w http.ResponseWriter, r *http.Request)
 	GetReadinessProbe(w http.ResponseWriter, r *http.Request)
