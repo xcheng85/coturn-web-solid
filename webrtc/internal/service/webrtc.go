@@ -3,6 +3,8 @@ package service
 import (
 	"context"
 	"fmt"
+	"net"
+
 	"github.com/xcheng85/coturn-web-solid/internal/config"
 	"github.com/xcheng85/coturn-web-solid/webrtc/internal/domain"
 	"github.com/xcheng85/coturn-web-solid/webrtc/internal/dto"
@@ -43,10 +45,14 @@ func (svc webRTCService) GetWebRTCConfig(ctx context.Context, data dto.GetWebRTC
 	// secret
 	password := svc.config.Get("data.data.password").(string)
 
-	ips := []string{externalIP}
+	ips := []string{}
+	addr := net.ParseIP(externalIP)
+	if addr != nil {
+		ips = append(ips, externalIP)
+	} 
 
 	if len(ips) == 0 {
-		return nil, NewEmptyExternalIpErr()
+		return nil, NewInvalidExternalIpErr(externalIP)
 	}
 
 	publicStunServerUrls, stunServerUrls, turnServerUrls := []string{

@@ -4,23 +4,23 @@ import (
 	"fmt"
 )
 
-type EmptyExternalIpErr struct {
-
+type InvalidExternalIpErr struct {
+  address string
 }
 
-func (r *EmptyExternalIpErr) Error() string {
-  return fmt.Sprintf("no external ips of load balancer(s) are available")
+func (r *InvalidExternalIpErr) Error() string {
+  return fmt.Sprintf("External Ip: %s is invalid", r.address)
 }
 
 // assert style in golang
-func (s *EmptyExternalIpErr) Is(target error) bool {
-  _, ok := target.(*EmptyExternalIpErr)
+func (s *InvalidExternalIpErr) Is(target error) bool {
+  _, ok := target.(*InvalidExternalIpErr)
   if !ok {
     return false
   }
   return true
 }
 
-func NewEmptyExternalIpErr() *EmptyExternalIpErr {
-	return &EmptyExternalIpErr{}
+func NewInvalidExternalIpErr(address string) *InvalidExternalIpErr {
+	return &InvalidExternalIpErr{address}
 }

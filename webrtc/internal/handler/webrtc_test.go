@@ -82,7 +82,7 @@ func TestWebRTCHandler_GetWebRTCConfig(t *testing.T) {
 			},
 			inWebRTCServiceMock: func() *service.MockIWebRTCService {
 				mockWebRTCService := &service.MockIWebRTCService{}
-				mockWebRTCService.On("GetWebRTCConfig", mock.Anything, mock.Anything).Return(nil, service.NewEmptyExternalIpErr()).Once()
+				mockWebRTCService.On("GetWebRTCConfig", mock.Anything, mock.Anything).Return(nil, service.NewInvalidExternalIpErr("")).Once()
 				return mockWebRTCService
 			},
 			inAuthServiceMock: func() *auth.MockIAuthService {
@@ -90,7 +90,7 @@ func TestWebRTCHandler_GetWebRTCConfig(t *testing.T) {
 				return mockAuthService
 			},
 			expectedStatus:  http.StatusInternalServerError,
-			expectedPayload: "{\"status\":\"Server Internal Error\",\"error\":\"no external ips of load balancer(s) are available\"}\n",
+			expectedPayload: "{\"status\":\"Server Internal Error\",\"error\":\"External Ip:  is invalid\"}\n",
 		},
 	}
 	for _, s := range scenarios {
