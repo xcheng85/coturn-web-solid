@@ -22,6 +22,7 @@ func NewViperConfig(paths []string, logger *zap.Logger) (cfg IConfig, err error)
 	viper.SetConfigType("yaml")
 	viper.SetConfigName("config")
 	viper.AddConfigPath("/config/")
+	viper.SetDefault("port", 8080)
 	err = viper.ReadInConfig()
 	viper.WatchConfig()
 	if err != nil {

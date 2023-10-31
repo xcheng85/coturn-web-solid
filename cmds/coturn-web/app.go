@@ -52,9 +52,10 @@ func (r *CompositionRoot) runRestServer(ctx context.Context) error {
 	mux := r.moduleCtx.Mux()
 	logger := r.moduleCtx.Logger()
 	config := r.moduleCtx.Config()
-
+	address := fmt.Sprintf(":%d", config.Get("port"))
+	logger.Sugar().Infof("runRestServer: %d", address)
 	restServer := &http.Server{
-		Addr:    fmt.Sprintf(":%s", config.Get("PORT")),
+		Addr: address,
 		Handler: mux,
 	}
 
