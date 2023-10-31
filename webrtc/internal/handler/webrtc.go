@@ -10,6 +10,7 @@ import (
 	"github.com/xcheng85/coturn-web-solid/webrtc/internal/service"
 )
 
+//go:generate mockery --name IWebRTCHandler
 type IWebRTCHandler interface {
 	GetWebRTCConfig(w http.ResponseWriter, r *http.Request)
 	// middleware

@@ -14,6 +14,7 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 	"github.com/xcheng85/coturn-web-solid/internal/auth"
+	"github.com/xcheng85/coturn-web-solid/internal/test"
 	"github.com/xcheng85/coturn-web-solid/webrtc/internal/domain"
 	"github.com/xcheng85/coturn-web-solid/webrtc/internal/dto"
 	"github.com/xcheng85/coturn-web-solid/webrtc/internal/service"
@@ -112,15 +113,6 @@ func TestWebRTCHandler_GetWebRTCConfig(t *testing.T) {
 	}
 }
 
-type MockHttpHandler struct {
-	mock.Mock
-}
-
-// DoSomething is a method on MyMockedObject that implements some interface
-func (m *MockHttpHandler) ServeHTTP(http.ResponseWriter, *http.Request) {
-	return
-}
-
 func TestWebRTCHandler_Authorize(t *testing.T) {
 	scenarios := []struct {
 		desc                string
@@ -164,7 +156,7 @@ func TestWebRTCHandler_Authorize(t *testing.T) {
 				return mockAuthService
 			},
 			inHttpHandlerMock: func() http.Handler {
-				mockHttpHandler := new(MockHttpHandler)
+				mockHttpHandler := new(test.MockHttpHandler)
 				mockHttpHandler.On("ServeHTTP", mock.Anything, mock.Anything).Return()
 				return mockHttpHandler
 			},
@@ -204,7 +196,7 @@ func TestWebRTCHandler_Authorize(t *testing.T) {
 				return mockAuthService
 			},
 			inHttpHandlerMock: func() http.Handler {
-				mockHttpHandler := new(MockHttpHandler)
+				mockHttpHandler := new(test.MockHttpHandler)
 				mockHttpHandler.On("ServeHTTP", mock.Anything, mock.Anything).Return()
 				return mockHttpHandler
 			},
