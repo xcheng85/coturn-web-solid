@@ -1,3 +1,13 @@
 github.com/xcheng85/coturn-web-solid/k8s/internal/handler/mock_IK8sHandler.go
 github.com/xcheng85/coturn-web-solid/webrtc/internal/handler/mock_IWebRTCHandler.go
 github.com/xcheng85/coturn-web-solid/webrtc/internal/service/mock_IWebRTCService.go
+github.com/xcheng85/coturn-web-solid/webrtc/internal/domain
+github.com/xcheng85/coturn-web-solid/webrtc/internal/dto
+github.com/xcheng85/coturn-web-solid/webrtc/internal/logging
+
+github.com/xcheng85/coturn-web-solid/internal/auth
+github.com/xcheng85/coturn-web-solid/internal/http
+github.com/xcheng85/coturn-web-solid/internal/logger
+github.com/xcheng85/coturn-web-solid/internal/config
+github.com/xcheng85/coturn-web-solid/internal/test
+github.com/xcheng85/coturn-web-solid/internal/worker

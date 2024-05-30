@@ -65,6 +65,14 @@ sudo tar -C /usr/local/bin -xzf ./mockery_2.36.0_Linux_x86_64.tar.gz
 //go:generate mockery --name DB
 
 # generate mock
-xcheng4@SLB-8N5VFY3:~/coturn-web-solid/webrtc/internal/service$ go generate
-xcheng4@SLB-8N5VFY3:~/coturn-web-solid/internal/auth$ go generate
+:~/coturn-web-solid/webrtc/internal/service$ go generate
+:~/coturn-web-solid/internal/auth$ go generate
+```
+
+## Fixed the vulnerability
+```shell
+govulncheck ./...
+# fix bad indirect library
+go get golang.org/x/net
+go mod vendor
 ```
